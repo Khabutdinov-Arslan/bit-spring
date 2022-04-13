@@ -6,22 +6,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class FileRepository {
-    public void saveFile(String file_name, byte[] file) {
-        try {
-            Files.write(Path.of(file_name), file);
-        } catch (IOException ignored) {
-        }
+    private final Map<String, MultipartFile> fileStorage = new ConcurrentHashMap<>();
+
+    public void saveFile(String file_name, MultipartFile file) {
+        fileStorage.put(file_name, file);
     }
 
-    public byte[] getFile(String file_name) {
-        try {
-            return Files.readAllBytes(Path.of(file_name));
-        } catch (IOException e){
-            return new byte[0];
-        }
+    public MultipartFile getFile(String file_name) {
+        return fileStorage.get(file_name);
     }
 }

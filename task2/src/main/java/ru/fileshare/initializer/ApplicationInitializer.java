@@ -4,7 +4,9 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
+import java.io.File;
 
 public class ApplicationInitializer implements WebApplicationInitializer {
     @Override
@@ -17,5 +19,10 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         final var registration = servletContext.addServlet("app", servlet);
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
+
+        File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+        MultipartConfigElement multipartConfigElement = new  MultipartConfigElement(uploadDirectory.getAbsolutePath(), 100000, 100000 * 2, 100000 / 2);
+
+        registration.setMultipartConfig(multipartConfigElement);
     }
 }

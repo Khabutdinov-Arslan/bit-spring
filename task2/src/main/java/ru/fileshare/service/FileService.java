@@ -10,7 +10,7 @@ public class FileService {
 
     public FileService(FileRepository repository) { this.repository = repository; }
 
-    public void saveFile(String file_name, byte[] file) { repository.saveFile(file_name, file); }
+    public void saveFile(String file_name, MultipartFile file) { repository.saveFile(file_name, file); }
 
-    public byte[] getFile(String file_name) { return repository.getFile(file_name); }
+    public MultipartFile getFile(String file_name) { return repository.getFile(file_name); }
 }
