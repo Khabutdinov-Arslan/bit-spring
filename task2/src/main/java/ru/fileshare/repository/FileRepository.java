@@ -14,11 +14,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FileRepository {
     private final Map<String, MultipartFile> fileStorage = new ConcurrentHashMap<>();
 
-    public void saveFile(String file_name, MultipartFile file) {
-        fileStorage.put(file_name, file);
+    public void saveFile(String fileName, MultipartFile file) {
+        fileStorage.put(fileName, file);
     }
 
-    public MultipartFile getFile(String file_name) {
-        return fileStorage.get(file_name);
+    public MultipartFile getFile(String fileName) {
+        return fileStorage.get(fileName);
     }
 }

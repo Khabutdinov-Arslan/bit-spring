@@ -19,9 +19,11 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         final var registration = servletContext.addServlet("app", servlet);
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
-
+        final var maxFileSize = 100000;
+        final var maxRequestSize = 200000;
+        final var fileSizeThreshold = 50000;
         File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
-        MultipartConfigElement multipartConfigElement = new  MultipartConfigElement(uploadDirectory.getAbsolutePath(), 100000, 100000 * 2, 100000 / 2);
+        MultipartConfigElement multipartConfigElement = new  MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxFileSize, maxRequestSize, fileSizeThreshold);
 
         registration.setMultipartConfig(multipartConfigElement);
     }

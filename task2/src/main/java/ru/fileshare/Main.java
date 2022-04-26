@@ -15,7 +15,8 @@ public class Main {
         tomcat.setBaseDir(baseDir.toAbsolutePath().toString());
 
         final var connector = new Connector();
-        connector.setPort(9999);
+        final var port = 9999;
+        connector.setPort(port);
         tomcat.setConnector(connector);
 
         tomcat.getHost().setAppBase(".");

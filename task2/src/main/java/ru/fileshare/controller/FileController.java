@@ -14,7 +14,6 @@ public class FileController {
 
     @PostMapping(value = "/file", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public void saveFile(@RequestParam String filename,  @RequestPart(name = "file") MultipartFile content) {
-        //System.out.println(new String(content));
         service.saveFile(filename, content);
     }
 
